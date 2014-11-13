@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html ng-app="helloworld">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+        <title>Hello World</title>
+
+
+        <script src="bower_components/onsenui/build/js/angular/angular.min.js"></script>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+
+        <script src="cordova.js"></script>
+
+        <script src="app/app.js"></script>
+
+        <script type="text/javascript">
+            document.addEventListener("deviceready", onDeviceReady, false);
+        </script>
+
+        <style>
+            body {
+                background-color: black;
+            }
+            body div {
+                background-color: rgba(156, 156, 159, 1);
+                padding: 10px;
+            }
+            body div div {
+                background-color: #e4e4e4;
+            }
+            body div div div {
+                margin:10px;
+                background-color: #b8b8b8;
+                -webkit-box-shadow: 0 0 5px 0 rgba(1,1,1,0.2);
+                box-shadow: 0 0 5px 0 rgba(1,1,1,0.2);
+                border: 1px solid #e2e2e2;
+            }
+            body div div div div {
+                margin:10px 0 10px 0;
+                background-color: #efefef;
+                -webkit-box-shadow: 0 0 5px 0 rgba(1,1,1,0.2);
+                box-shadow: 0 0 5px 0 rgba(1,1,1,0.2);
+                border: 1px solid #e2e2e2;
+            }
+            body div div div div p{
+                margin:0;
+            }
+            #output input {
+                margin:10px 0 10px 0;
+            }
+            input[type="button"] {
+                margin:10px;
+            }
+        </style>
+
+        <script>
+            $( document ).ready(function() {
+                $('#1').hide();
+                $('#2').hide();
+                $('#3').hide();
+                $('#4').hide();
+                $('#5').hide();
+            });
+            function clicky(id) {
+                $('#'+id).slideToggle('fast');
+            }
+        </script>
+
+    </head>
+    <body ng-controller="AppCtrl">
+    <p style="color:white;">ng-app="helloworld"</p>
+
+    <div>
+        <p>{{title}}</p>
+
+
+            <div ng-controller="PageCtrl">
+
+
+                <p>{{title}}</p>
+
+
+
+
+
+
+                <input type="button" value="Show 1" onclick="clicky(1)" ><br/>
+
+                <div id="1">
+                    <p ng-repeat="a in array">{{a}}</p>
+                </div>
+
+
+
+
+
+
+
+                <input type="button" value="Show 2" onclick="clicky(2)" ><br/>
+
+                <section id="2">
+                    <div ng-repeat="a in array">
+                        {{a}}
+                    </div>
+                </section>
+
+
+
+
+
+
+
+                <input type="button" value="Show 3" onclick="clicky(3)" ><br/>
+
+                <div id="3">
+                    <ul>
+                        <li ng-repeat="a in array">
+                            {{a}}
+                        </li>
+                    </ul>
+                </div>
+
+
+
+
+
+
+                <input type="button" value="Show 4" onclick="clicky(4)" ><br/>
+
+                <div id="4">
+                    <ul ng-repeat="j in json">
+                        <li>id: {{j.id}}</li>
+                        <li>name: {{j.name}}</li>
+                    </ul>
+                </div>
+
+
+
+
+
+
+
+                <input type="button" value="Show 5" onclick="clicky(5)" ><br/>
+
+                <div id="5" ng-controller="FormCtrl">
+                    {{title}}
+                    <div>
+                        <p>Add this text to the array:</p>
+                        {{textToAdd}}
+                    </div>
+
+                    <div id="output">
+                        <p>Output:</p>
+                        <p ng-repeat="a in added | filter:search">ItemNo: {{a.id}} | {{a.txt}}</p>
+                        <input ng-model="search" placeholder="Filter output">
+                        <input type="button" ng-click="clear()" value="Clear output">
+                    </div>
+
+                    <form ng-submit="addTo()">
+                        <input ng-model="textToAdd">
+                    </form>
+                </div>
+
+                <input type="button" value="Show 5" onclick="clicky(6)" ><br/>
+
+                <div id="6" ng-controller="BarcodeCtrl">
+                    {{title}}
+
+                <input type="button" ng-click="scanBarcode()">
+
+
+                </div>
+
+
+
+            </div>
+
+    </div>
+
+    </body>
+</html>
