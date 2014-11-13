@@ -12,11 +12,13 @@
         <script src="bower_components/onsenui/build/js/angular/angular.min.js"></script>
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
-
+        
         <script src="cordova.js"></script>
 
         <script src="app/app.js"></script>
 
+
+        <!-- Initialize cordova -->
         <script type="text/javascript">
             document.addEventListener("deviceready", onDeviceReady, false);
         </script>
@@ -58,13 +60,6 @@
         </style>
 
         <script>
-            $( document ).ready(function() {
-                $('#1').hide();
-                $('#2').hide();
-                $('#3').hide();
-                $('#4').hide();
-                $('#5').hide();
-            });
             function clicky(id) {
                 $('#'+id).slideToggle('fast');
             }
@@ -85,67 +80,6 @@
 
 
 
-
-
-
-                <input type="button" value="Show 1" onclick="clicky(1)" ><br/>
-
-                <div id="1">
-                    <p ng-repeat="a in array">{{a}}</p>
-                </div>
-
-
-
-
-
-
-
-                <input type="button" value="Show 2" onclick="clicky(2)" ><br/>
-
-                <section id="2">
-                    <div ng-repeat="a in array">
-                        {{a}}
-                    </div>
-                </section>
-
-
-
-
-
-
-
-                <input type="button" value="Show 3" onclick="clicky(3)" ><br/>
-
-                <div id="3">
-                    <ul>
-                        <li ng-repeat="a in array">
-                            {{a}}
-                        </li>
-                    </ul>
-                </div>
-
-
-
-
-
-
-                <input type="button" value="Show 4" onclick="clicky(4)" ><br/>
-
-                <div id="4">
-                    <ul ng-repeat="j in json">
-                        <li>id: {{j.id}}</li>
-                        <li>name: {{j.name}}</li>
-                    </ul>
-                </div>
-
-
-
-
-
-
-
-                <input type="button" value="Show 5" onclick="clicky(5)" ><br/>
-
                 <div id="5" ng-controller="FormCtrl">
                     {{title}}
                     <div>
@@ -161,16 +95,32 @@
                     </div>
 
                     <form ng-submit="addTo()">
-                        <input ng-model="textToAdd">
+                        <input placeholder="input stuff here" ng-model="textToAdd">
                     </form>
                 </div>
 
-                <input type="button" value="Show 5" onclick="clicky(6)" ><br/>
 
+                <!-- barcode stuffs -->
                 <div id="6" ng-controller="BarcodeCtrl">
                     {{title}}
 
-                <input type="button" ng-click="scanBarcode()">
+                <input type="button" value="Scan me" onclick="scanBarcode()">
+
+                    <script>
+                        function scanBarcode () {
+                            cordova.plugins.barcodeScanner.scan(
+                                    function (result) {
+                                        alert("We got a barcode\n" +
+                                        "Result: " + result.text + "\n" +
+                                        "Format: " + result.format + "\n" +
+                                        "Cancelled: " + result.cancelled);
+                                    },
+                                    function (error) {
+                                        alert("Scanning failed: " + error);
+                                    }
+                            );
+                        }
+                    </script>
 
 
                 </div>
